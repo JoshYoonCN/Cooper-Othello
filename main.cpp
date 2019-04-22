@@ -90,12 +90,25 @@ void init_board(){
 
 	//create objects on heap, prevent overflow with "new"
 	//initiliazing the board
-	for(int i = 0; i < 10; i++){
+	for (int i = 1; i < 9; i++){
 		
-		for(int j = 0; j < 10; j++){
+		for(int j = 1; j < 9; j++){
 
 			Board[i][j] = new Space(0, '-');
 		}
+	}
+
+	//set boundary
+	for (int ii = 0; ii < 10; ii++){
+		
+		Board[0][ii] = new Space(0, '+');
+		Board[9][ii] = new Space(0, '+');	
+	}
+
+	for (int jj = 1; jj < 9; jj++){
+
+		Board[jj][0] = new Space(0, '+');
+		Board[jj][9] = new Space(0, '+');
 	}
 
 	//set initial board state
@@ -123,16 +136,197 @@ void print_board(){
 	return;
 }
 
-//check if space is valid
-int space_valid(char c){
+int prop_valid(char c, int id){
 
+	if (id == 1){
+
+		if (c == 'B'){
+
+			return 1;
+		}
+
+		return 0;
+	}
+
+	else if (id == 2){
+
+		if (c == 'W'){
+
+			return 1;
+		}
+
+		return 0;
+	}
+
+	return 0;
+}
+
+
+int propagate(int row, int col, signed int row_increment, signed int col_increment, int id){
+
+	int cond = 0;
+
+	while (1){
+
+		row += row_increment;
+		col += col_increment;
+
+		if (prop_valid(Board[row][col]->p.bOrW, id)){
+			
+			cond++;
+			break;		
+		}
+		
+		if(Board[row][col]->p.bOrW == '+'){
+
+			break;
+		}
+	}
+
+	if (cond == 1){
+
+		return 1;
+	}
+
+	return 0;
+}
+
+
+//check if space is valid
+int space_valid(int row, int col, int id){
+
+	char c = Board[row][col]->p.bOrW;
+	
 	if (c == 'B' || c == 'W'){
 		
 		cout << "That space is not valid!" << endl;
 		return 0;
 	}
 	
-	return 1;
+	if (id == 1){
+
+		if (Board[row+1][col]->p.bOrW == 'W'){
+			
+			if(propagate(row, col, 1, 0, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row][col-1]->p.bOrW == 'W'){
+		
+			if(propagate(row, col, 0, -1, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row][col+1]->p.bOrW == 'W'){
+			
+			if(propagate(row, col, 0, 1, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row-1][col]->p.bOrW == 'W'){
+		
+			if(propagate(row, col, -1, 0, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row-1][col-1]->p.bOrW == 'W'){
+		
+			if(propagate(row, col, -1, -1, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row-1][col+1]->p.bOrW == 'W'){
+
+			if(propagate(row, col, -1, 1, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row+1][col-1]->p.bOrW == 'W'){
+		
+			if(propagate(row, col, 1, -1, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row+1][col+1]->p.bOrW == 'W'){
+		
+			if(propagate(row, col, 1, 1, id)){
+				
+				return 1;	
+			}
+		}
+
+	}
+
+	if (id == 2){
+
+		if (Board[row+1][col]->p.bOrW == 'B'){
+			
+			if(propagate(row, col, 1, 0, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row][col-1]->p.bOrW == 'B'){
+		
+			if(propagate(row, col, 0, -1, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row][col+1]->p.bOrW == 'B'){
+			
+			if(propagate(row, col, 0, 1, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row-1][col]->p.bOrW == 'B'){
+		
+			if(propagate(row, col, -1, 0, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row-1][col-1]->p.bOrW == 'B'){
+		
+			if(propagate(row, col, -1, -1, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row-1][col+1]->p.bOrW == 'B'){
+
+			if(propagate(row, col, -1, 1, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row+1][col-1]->p.bOrW == 'B'){
+		
+			if(propagate(row, col, 1, -1, id)){
+				
+				return 1;	
+			}
+		}
+		if (Board[row+1][col+1]->p.bOrW == 'B'){
+		
+			if(propagate(row, col, 1, 1, id)){
+				
+				return 1;	
+			}
+		}
+
+	}
+
+	cout << "That space is not valid!" << endl;
+	return 0;
 }
 
 //check if the user row input is valid
@@ -208,16 +402,16 @@ void player_move(int id){
 
 		} while (!col_input_valid(col));
 	
-	//assign proper space based on which player
-	} while(!space_valid(Board[row+1][col+1]->p.bOrW));
+	} while(!space_valid(row+1, col+1, id));
 
+	//assign proper space based on player
 	if (id == 1){
 		
-		Board[row+1][col+1]->p.bOrW = 'W';	
+		Board[row+1][col+1]->p.bOrW = 'B';	
 	}
 	else if (id == 2){
 
-		Board[row+1][col+1]->p.bOrW = 'B';
+		Board[row+1][col+1]->p.bOrW = 'W';
 	}
 
 	return;
