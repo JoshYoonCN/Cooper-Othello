@@ -166,6 +166,8 @@ int prop_valid(char c, int id){
 int propagate(int row, int col, signed int row_increment, signed int col_increment, int id){
 
 	int cond = 0;
+	int row_copy = row;
+	int col_copy = col;
 
 	while (1){
 	
@@ -189,6 +191,25 @@ int propagate(int row, int col, signed int row_increment, signed int col_increme
 
 	if (cond == 1){
 
+		row_copy += row_increment;
+		col_copy += col_increment;
+
+		//this while loop flips pieces
+		while (!prop_valid(Board[row_copy][col_copy]->p.bOrW, id)){
+			
+			if (Board[row_copy][col_copy]->p.bOrW == 'B'){
+
+				Board[row_copy][col_copy]->p.bOrW = 'W';
+			}
+			else if (Board[row_copy][col_copy]->p.bOrW == 'W'){
+				
+				Board[row_copy][col_copy]->p.bOrW = 'B';
+			}
+
+			row_copy += row_increment;
+			col_copy += col_increment;
+		}
+		
 		return 1;
 	}
 
