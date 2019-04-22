@@ -98,7 +98,7 @@ void init_board(){
 		}
 	}
 
-	//set boundary
+	//set boundary to easily check for edge of board
 	for (int ii = 0; ii < 10; ii++){
 		
 		Board[0][ii] = new Space(0, '+');
@@ -136,6 +136,7 @@ void print_board(){
 	return;
 }
 
+//helps the propagate function by checking for B or W, reduces clutter
 int prop_valid(char c, int id){
 
 	if (id == 1){
@@ -161,22 +162,25 @@ int prop_valid(char c, int id){
 	return 0;
 }
 
-
+//this function checks along a diagonal, horizontal, or vertical line to check for valid moves
 int propagate(int row, int col, signed int row_increment, signed int col_increment, int id){
 
 	int cond = 0;
 
 	while (1){
-
+	
+		//increment depending on what direction was specified by function call
 		row += row_increment;
 		col += col_increment;
-
+		
+		//check if the player's color terminates the line
 		if (prop_valid(Board[row][col]->p.bOrW, id)){
 			
 			cond++;
 			break;		
 		}
 		
+		//check for end of board
 		if(Board[row][col]->p.bOrW == '+'){
 
 			break;
@@ -195,14 +199,16 @@ int propagate(int row, int col, signed int row_increment, signed int col_increme
 //check if space is valid
 int space_valid(int row, int col, int id){
 
+	//this initial statement checks for whether the space player chose is occupied
 	char c = Board[row][col]->p.bOrW;
 	
 	if (c == 'B' || c == 'W'){
 		
-		cout << "That space is not valid!" << endl;
+		cout << "That space is occupied!" << endl;
 		return 0;
 	}
-	
+
+	//these series of if statements (try to optimize later!) check around the player's input in order to check for a legal move
 	if (id == 1){
 
 		if (Board[row+1][col]->p.bOrW == 'W'){
@@ -264,6 +270,7 @@ int space_valid(int row, int col, int id){
 
 	}
 
+	//if player 2, switch to checking for black pieces
 	if (id == 2){
 
 		if (Board[row+1][col]->p.bOrW == 'B'){
@@ -325,6 +332,7 @@ int space_valid(int row, int col, int id){
 
 	}
 
+	//if all the above fails, means the move is not valid
 	cout << "That space is not valid!" << endl;
 	return 0;
 }
