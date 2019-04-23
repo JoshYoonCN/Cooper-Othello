@@ -1,0 +1,13 @@
+classes:
+space
+board
+- made of space classes
+- print board
+piece
+- black, white (b,w)
+
+
+game logic:
+- check if any pieces of different color are around placed piece
+- if yes, then continue checking in that line until valid condition met or hit space
+- make 10*10 board and so only have to check for empty space for invalid
