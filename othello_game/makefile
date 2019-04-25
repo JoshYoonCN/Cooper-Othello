@@ -1,8 +1,8 @@
 CC=g++ -std=c++11
 CFLAGS=-I.
 
-make: board_func.o main.o propagate.o valid_stuff.o
-	$(CC) $(CFLAGS) -o othello board_func.o main.o propagate.o valid_stuff.o
+make: board_func.o main.o propagate.o valid_stuff.o player.o
+	$(CC) $(CFLAGS) -o othello board_func.o main.o propagate.o valid_stuff.o player.o
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) -c main.cpp
@@ -15,6 +15,9 @@ propagate.o: propagate.cpp
 
 valid_stuff.o: valid_stuff.cpp
 	$(CC) $(CFLAGS) -c valid_stuff.cpp
+
+player.o: player.cpp
+	$(CC) $(CFLAGS) -c player.cpp
 
 clean:
 	rm -f *.o *.exe *.out othello
