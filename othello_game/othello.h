@@ -73,13 +73,49 @@ public:
 //some useful typedef aliases
 typedef vector<Space*> row;
 typedef vector<row> arr;
+
+class Player {
+	
+public:
+
+	int id;
+	int playing;
+
+	Player () {}
+	
+	Player (int id, int playing) : id(id), playing(playing) {}
+	
+	~Player(){}
+	
+	void player_move(int id, arr& Board);
+};
+
+class Computer {
+	
+public:
+
+	int id;
+	int playing;
+
+	Computer () {}	
+	
+	Computer (int id, int playing) : id(id), playing(playing) {}
+
+	~Computer () {}
+	
+	void computer_move(int id, arr& Board);
+};
+
 /*
 class Board {
 
 public:
 	arr gameBoard (10, row(10));
 
-	Board () {};
+	Board () {
+		
+		gameBoard = new arr (10, row(10));	
+	};
 
 	~Board () {};
 };*/
@@ -88,13 +124,14 @@ public:
 //vector<vector<Space*> > Board (10, vector<Space*>(10));
 //arr Board (10, row(10));
 
+void ask_opponent(Player &p1, Player &p2, Computer& c);
 void init_board(arr& Board);
 void print_board(arr& Board);
 int prop_valid(char c, int id);
 int propagate(int row, int col, signed int row_increment, signed int col_increment, int id, arr& Board);
-int space_valid(int row, int col, int id, arr& Board);
+int space_valid(int row, int col, int id, arr& Board, int c_or_p);
 int row_input_valid(int input);
 int col_input_valid(int input);
-void player_move(int id, arr& Board);
+int yes_no_valid(char c);
 
 #endif

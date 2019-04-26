@@ -55,6 +55,7 @@ int propagate(int row, int col, signed int row_increment, signed int col_increme
 
 	if (cond == 1){
 
+		//cout << "flipping mechanism called" << endl;
 		row_copy += row_increment;
 		col_copy += col_increment;
 
