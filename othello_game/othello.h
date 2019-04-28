@@ -14,17 +14,21 @@ public:
 
 	//define member public for now - will change later
 	char bOrW;
+	string unicode;
 
 	//default constructor so compiler won't yell at me
 	Piece () {}
 
 	//constructor that will initialize bOrW with some input we decide
+	Piece (char input, string u) : bOrW(input), unicode(u) {}
+
 	Piece (char input) : bOrW(input) {}
 
 	//assignment operator overload
 	Piece& operator= (const Piece& p){
 
 		bOrW = p.bOrW;
+		unicode = p.unicode;
 		return *this;
 	}
 
@@ -32,6 +36,7 @@ public:
 	Piece (const Piece& p){
 
 		bOrW = p.bOrW;
+		unicode = p.unicode;
 	}
 
 	//destructor - note that I THINK this will also clear the memory created by "new"
@@ -52,17 +57,21 @@ public:
 	//constructor that will initialize with correct values
 	Space (int input, char p) : isFilled(input), p(p) {}
 
+	Space (int input, char p, string u) : isFilled(input), p(p, u) {}
 	//assignment operator overload
 	Space& operator= (const Space& s){
 		
 		isFilled = s.isFilled;
 		p.bOrW = s.p.bOrW;
+		p.unicode = s.p.unicode;
 		return *this;
 	}
 
 	//copy constructor
 	Space (const Space& s){
 		isFilled = s.isFilled;
+		p.bOrW = s.p.bOrW;
+		p.unicode = s.p.unicode;
 	}
 
 	//destructor
@@ -128,10 +137,12 @@ void ask_opponent(Player &p1, Player &p2, Computer& c);
 void init_board(arr& Board);
 void print_board(arr& Board);
 int prop_valid(char c, int id);
-int propagate(int row, int col, signed int row_increment, signed int col_increment, int id, arr& Board);
-int space_valid(int row, int col, int id, arr& Board, int c_or_p);
+int propagate(int row, int col, signed int row_increment, signed int col_increment, int id, arr& Board, int flip);
+int space_valid(int row, int col, int id, arr& Board, int c_or_p, int flip);
 int row_input_valid(int input);
 int col_input_valid(int input);
 int yes_no_valid(char c);
+int end_condition(arr& Board);
+void points(arr& Board);
 
 #endif

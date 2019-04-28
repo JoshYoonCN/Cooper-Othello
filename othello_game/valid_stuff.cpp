@@ -2,7 +2,7 @@
 
 //white is player 1, black is player 2
 //check if space is valid
-int space_valid(int row, int col, int id, arr& Board, int c_or_p){
+int space_valid(int row, int col, int id, arr& Board, int c_or_p, int flip){
 
 	int valid = 0;
 
@@ -17,7 +17,6 @@ int space_valid(int row, int col, int id, arr& Board, int c_or_p){
 		
 		return 0;
 	}
-
 	
 	//these series of if statements (try to optimize later!) check around the player's input in order to check for a legal move
 	//can optimize by returning the result of propagate directly
@@ -25,56 +24,56 @@ int space_valid(int row, int col, int id, arr& Board, int c_or_p){
 
 		if (Board[row+1][col]->p.bOrW == 'W'){
 			
-			if(propagate(row, col, 1, 0, id, Board)){
+			if(propagate(row, col, 1, 0, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row][col-1]->p.bOrW == 'W'){
 		
-			if(propagate(row, col, 0, -1, id, Board)){
+			if(propagate(row, col, 0, -1, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row][col+1]->p.bOrW == 'W'){
 			
-			if(propagate(row, col, 0, 1, id, Board)){
+			if(propagate(row, col, 0, 1, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row-1][col]->p.bOrW == 'W'){
 		
-			if(propagate(row, col, -1, 0, id, Board)){
+			if(propagate(row, col, -1, 0, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row-1][col-1]->p.bOrW == 'W'){
 		
-			if(propagate(row, col, -1, -1, id, Board)){
+			if(propagate(row, col, -1, -1, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row-1][col+1]->p.bOrW == 'W'){
 
-			if(propagate(row, col, -1, 1, id, Board)){
+			if(propagate(row, col, -1, 1, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row+1][col-1]->p.bOrW == 'W'){
 		
-			if(propagate(row, col, 1, -1, id, Board)){
+			if(propagate(row, col, 1, -1, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row+1][col+1]->p.bOrW == 'W'){
 		
-			if(propagate(row, col, 1, 1, id, Board)){
+			if(propagate(row, col, 1, 1, id, Board, flip)){
 				
 				valid++;	
 			}
@@ -87,61 +86,60 @@ int space_valid(int row, int col, int id, arr& Board, int c_or_p){
 
 		if (Board[row+1][col]->p.bOrW == 'B'){
 			
-			if(propagate(row, col, 1, 0, id, Board)){
+			if(propagate(row, col, 1, 0, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row][col-1]->p.bOrW == 'B'){
 		
-			if(propagate(row, col, 0, -1, id, Board)){
+			if(propagate(row, col, 0, -1, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row][col+1]->p.bOrW == 'B'){
 			
-			if(propagate(row, col, 0, 1, id, Board)){
+			if(propagate(row, col, 0, 1, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row-1][col]->p.bOrW == 'B'){
 		
-			if(propagate(row, col, -1, 0, id, Board)){
+			if(propagate(row, col, -1, 0, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row-1][col-1]->p.bOrW == 'B'){
 		
-			if(propagate(row, col, -1, -1, id, Board)){
+			if(propagate(row, col, -1, -1, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row-1][col+1]->p.bOrW == 'B'){
 
-			if(propagate(row, col, -1, 1, id, Board)){
+			if(propagate(row, col, -1, 1, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row+1][col-1]->p.bOrW == 'B'){
 		
-			if(propagate(row, col, 1, -1, id, Board)){
+			if(propagate(row, col, 1, -1, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
 		if (Board[row+1][col+1]->p.bOrW == 'B'){
 		
-			if(propagate(row, col, 1, 1, id, Board)){
+			if(propagate(row, col, 1, 1, id, Board, flip)){
 				
 				valid++;	
 			}
 		}
-
 	}
 
 	if (valid){

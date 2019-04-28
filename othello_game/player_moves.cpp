@@ -89,16 +89,18 @@ void Player::player_move(int id, arr& Board){
 		} while (!col_input_valid(col));
 
 	//last term there is for the int c_or_p argument, which is to determine if the instance using the function is the computer or a player	
-	} while(!space_valid(row, col, id, Board, 1));
+	} while(!space_valid(row, col, id, Board, 1, 1));
 
 	//assign proper space based on player
 	if (id == 1){
 		
 		Board[row][col]->p.bOrW = 'B';	
+		Board[row][col]->p.unicode = "\u25CB";
 	}
 	else if (id == 2){
 
 		Board[row][col]->p.bOrW = 'W';
+		Board[row][col]->p.unicode = "\u25CF";
 	}
 
 	return;

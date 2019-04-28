@@ -27,7 +27,7 @@ int prop_valid(char c, int id){
 }
 
 //this function checks along a diagonal, horizontal, or vertical line to check for valid moves
-int propagate(int row, int col, signed int row_increment, signed int col_increment, int id, arr& Board){
+int propagate(int row, int col, signed int row_increment, signed int col_increment, int id, arr& Board, int flip){
 
 	int cond = 0;
 	int row_copy = row;
@@ -53,7 +53,7 @@ int propagate(int row, int col, signed int row_increment, signed int col_increme
 		}
 	}
 
-	if (cond == 1){
+	if (cond == 1 && flip == 1){
 
 		//cout << "flipping mechanism called" << endl;
 		row_copy += row_increment;
@@ -65,16 +65,22 @@ int propagate(int row, int col, signed int row_increment, signed int col_increme
 			if (Board[row_copy][col_copy]->p.bOrW == 'B'){
 
 				Board[row_copy][col_copy]->p.bOrW = 'W';
+				Board[row_copy][col_copy]->p.unicode = "\u25CF";
 			}
 			else if (Board[row_copy][col_copy]->p.bOrW == 'W'){
 
 				Board[row_copy][col_copy]->p.bOrW = 'B';
+				Board[row_copy][col_copy]->p.unicode = "\u25CB";
 			}
 
 			row_copy += row_increment;
 			col_copy += col_increment;
 		}
 
+		return 1;
+	}
+	else if (cond == 1 && flip == 0){
+		
 		return 1;
 	}
 

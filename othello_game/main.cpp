@@ -14,7 +14,7 @@ int main(){
 
 	ask_opponent(p1, p2, c);
 
-	while (turnCount < 60) {
+	while (end_condition(Board)) {
 
 		print_board(Board);
 	
@@ -54,7 +54,9 @@ int main(){
 
 			}
 		}
-			
+
+		points(Board);
+					
 		turnCount++;
 	}
 
