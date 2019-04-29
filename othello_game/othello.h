@@ -46,11 +46,11 @@ public:
 //I don't see a need for inheritance just yet
 class Space{
 public:
-	
+
 	//members for Space class - public for now
 	Piece p;
 	int isFilled;
-		
+
 	//default constructor
 	Space () {}
 
@@ -60,7 +60,7 @@ public:
 	Space (int input, char p, string u) : isFilled(input), p(p, u) {}
 	//assignment operator overload
 	Space& operator= (const Space& s){
-		
+
 		isFilled = s.isFilled;
 		p.bOrW = s.p.bOrW;
 		p.unicode = s.p.unicode;
@@ -84,34 +84,34 @@ typedef vector<Space*> row;
 typedef vector<row> arr;
 
 class Player {
-	
+
 public:
 
 	int id;
 	int playing;
 
 	Player () {}
-	
+
 	Player (int id, int playing) : id(id), playing(playing) {}
-	
+
 	~Player(){}
-	
+
 	void player_move(int id, arr& Board);
 };
 
 class Computer {
-	
+
 public:
 
 	int id;
 	int playing;
 
-	Computer () {}	
-	
+	Computer () {}
+
 	Computer (int id, int playing) : id(id), playing(playing) {}
 
 	~Computer () {}
-	
+
 	void computer_move(int id, arr& Board);
 };
 
@@ -122,8 +122,8 @@ public:
 	arr gameBoard (10, row(10));
 
 	Board () {
-		
-		gameBoard = new arr (10, row(10));	
+
+		gameBoard = new arr (10, row(10));
 	};
 
 	~Board () {};
@@ -144,5 +144,6 @@ int col_input_valid(int input);
 int yes_no_valid(char c);
 int end_condition(arr& Board);
 void points(arr& Board);
+int point(arr& Board);
 
 #endif

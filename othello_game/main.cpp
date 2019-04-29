@@ -17,7 +17,7 @@ int main(){
 	while (end_condition(Board)) {
 
 		print_board(Board);
-	
+
 		if (!c.playing){
 
 			if (((turnCount%2)+1) == 1){
@@ -25,7 +25,7 @@ int main(){
 				p1.player_move(p1.id, Board);
 			}
 			else{
-	
+
 				p2.player_move(p2.id, Board);
 			}
 		}
@@ -34,11 +34,11 @@ int main(){
 			if (((turnCount%2)+1) == 1){
 
 				if (p1.id == 1){
-					
+
 					p1.player_move(p1.id, Board);
 				}
 				else{
-					
+
 					c.computer_move(c.id, Board);
 				}
 			}
@@ -48,7 +48,7 @@ int main(){
 					c.computer_move(c.id, Board);
 				}
 				else{
-					
+
 					p1.player_move(p1.id, Board);
 				}
 
@@ -56,7 +56,7 @@ int main(){
 		}
 
 		points(Board);
-					
+
 		turnCount++;
 	}
 
