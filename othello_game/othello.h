@@ -112,7 +112,7 @@ public:
 
 	~Computer () {}
 
-	void computer_move(int id, arr& Board);
+	void computer_move(int id, arr& Board, arr& Board2);
 };
 
 /*
@@ -145,5 +145,6 @@ int yes_no_valid(char c);
 int end_condition(arr& Board);
 void points(arr& Board);
 int point(arr& Board);
+void copy_board(arr& Board, arr& Board2);
 
 #endif

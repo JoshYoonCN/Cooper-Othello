@@ -148,3 +148,46 @@ void print_board(arr& Board){
 
 	return;
 }
+
+
+//2 board references - initialize 2nd board
+// copy constructors to copy the spaces
+
+void copy_board(arr& Board, arr& Board2){
+	cout << "initialize" << endl;
+	init_board(Board2);
+	for (int i = 1; i < 9; i++){
+
+		for(int j = 1; j < 9; j++){
+
+			*(Board2[i][j]) = *(Board[i][j]);
+		}
+	}
+
+	//set boundary to easily check for edge of board
+	for (int ii = 0; ii < 10; ii++){
+
+		*(Board2[0][ii]) = (*(Board[0][ii]));
+		*(Board2[9][ii]) = (*(Board[9][ii]));
+	}
+
+	for (int jj = 1; jj < 9; jj++){
+
+		*(Board2[jj][0]) = (*(Board[jj][0]));
+		*(Board2[jj][9]) = (*(Board[jj][9]));
+	}
+
+	//set initial Board2 state
+	Board2[4][4]->p.bOrW = 'W';
+	Board2[4][4]->p.unicode = "\u25CF";
+	Board2[4][5]->p.bOrW = 'B';
+	Board2[4][5]->p.unicode = "\u25CB";
+	Board2[5][4]->p.bOrW = 'B';
+	Board2[5][4]->p.unicode = "\u25CB";
+	Board2[5][5]->p.bOrW = 'W';
+	Board2[5][5]->p.unicode = "\u25CF";
+
+	print_board(Board2);
+	return;
+
+}

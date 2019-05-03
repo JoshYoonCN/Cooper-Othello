@@ -1,19 +1,18 @@
 #include "othello.h"
 
-void Computer::computer_move(int id, arr& Board){
+void Computer::computer_move(int id, arr& Board, arr& Board2){
 
 	int row = 0, col = 0, i = 0, j, breakCond = 0;
 	int space;
 	int current_point = 0;
 	int high_point = 0;
-/* //AI Testing
+/*
 	for(int row1 = 1; row1 < 9; row1 ++){ // check to see point values of its next move
 		for(int col1 = 1; col1 < 9; col1++){
 			if (!i){
-				if(space_valid(row1, col1, id, Board, 0, 1)){
+				if(space_valid(row1, col1, id, Board2, 0, 1)){
 					//fill in board with anticipated move, then check point value
 					if (id == 1){
-
 						Board[row+row1][col+col1]->p.bOrW = 'B';
 						Board[row+row1][col+col1]->p.unicode = "\u25CB";
 					}
@@ -24,20 +23,12 @@ void Computer::computer_move(int id, arr& Board){
 					}
 					current_point = point(Board);
 
-					//delete the anticipated move
 					if (current_point > high_point){
 						high_point = current_point;
 					}
-					if (id == 1){
-
-						Board[row+row1][col+col1]->p.bOrW = '-';
-						Board[row+row1][col+col1]->p.unicode = " ";
-					}
-					else if (id == 2){
-
-						Board[row+row1][col+col1]->p.bOrW = '-';
-						Board[row+row1][col+col1]->p.unicode = " ";
-					}
+					//delete the anticipated move
+					Board[row+row1][col+col1]->p.bOrW = '-';
+					Board[row+row1][col+col1]->p.unicode = " ";
 
 				}
 
@@ -46,7 +37,7 @@ void Computer::computer_move(int id, arr& Board){
 		}
 
 	}
-*/ //AI testing
+ *///AI testing
 	if (!high_point){
 		cout << "easy mode activated" << endl;
 	/*easy mode*/
