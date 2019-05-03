@@ -2,6 +2,8 @@
 
 arr Board (10, row(10));
 arr Board2 (10, row(10));
+arr Board3 (10, row(10));
+arr Board4 (10, row(10));
 
 int main(){
 
@@ -40,13 +42,13 @@ int main(){
 				}
 				else{
 
-					c.computer_move(c.id, Board, Board2);
+					c.computer_move(c.id, Board, Board2, Board3, Board4);
 				}
 			}
 			else{
 				if (p1.id == 1){
 
-					c.computer_move(c.id, Board, Board2);
+					c.computer_move(c.id, Board, Board2, Board3, Board4);
 				}
 				else{
 

@@ -112,7 +112,7 @@ public:
 
 	~Computer () {}
 
-	void computer_move(int id, arr& Board, arr& Board2);
+	void computer_move(int id, arr& Board, arr& Board2, arr& Board3, arr& Board4);
 };
 
 /*
