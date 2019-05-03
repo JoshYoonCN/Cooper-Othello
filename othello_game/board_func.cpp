@@ -154,7 +154,7 @@ void print_board(arr& Board){
 // copy constructors to copy the spaces
 
 void copy_board(arr& Board, arr& Board2){
-	cout << "initialize" << endl;
+	//cout << "initialize" << endl;
 	init_board(Board2);
 	for (int i = 1; i < 9; i++){
 
@@ -176,7 +176,7 @@ void copy_board(arr& Board, arr& Board2){
 		*(Board2[jj][0]) = (*(Board[jj][0]));
 		*(Board2[jj][9]) = (*(Board[jj][9]));
 	}
-
+/*
 	//set initial Board2 state
 	Board2[4][4]->p.bOrW = 'W';
 	Board2[4][4]->p.unicode = "\u25CF";
@@ -186,8 +186,8 @@ void copy_board(arr& Board, arr& Board2){
 	Board2[5][4]->p.unicode = "\u25CB";
 	Board2[5][5]->p.bOrW = 'W';
 	Board2[5][5]->p.unicode = "\u25CF";
-
-	print_board(Board2);
+*/
+	//print_board(Board2);
 	return;
 
 }

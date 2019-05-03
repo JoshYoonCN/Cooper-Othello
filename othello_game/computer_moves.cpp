@@ -6,40 +6,49 @@ void Computer::computer_move(int id, arr& Board, arr& Board2){
 	int space;
 	int current_point = 0;
 	int high_point = 0;
-/*
-	for(int row1 = 1; row1 < 9; row1 ++){ // check to see point values of its next move
-		for(int col1 = 1; col1 < 9; col1++){
-			if (!i){
-				if(space_valid(row1, col1, id, Board2, 0, 1)){
-					//fill in board with anticipated move, then check point value
-					if (id == 1){
-						Board[row+row1][col+col1]->p.bOrW = 'B';
-						Board[row+row1][col+col1]->p.unicode = "\u25CB";
-					}
-					else if (id == 2){
+	int high_row = 0;
+	int high_col = 0;
 
-						Board[row+row1][col+col1]->p.bOrW = 'W';
-						Board[row+row1][col+col1]->p.unicode = "\u25CF";
-					}
-					current_point = point(Board);
+ 	for(int row1 = 1; row1 < 9; row1 ++){ // check to see point values of its next move
+	 	for(int col1 = 1; col1 < 9; col1++){
+			copy_board(Board, Board2);
+			//cout << "testing" << endl;
+			//print_board(Board2);
 
-					if (current_point > high_point){
-						high_point = current_point;
-					}
-					//delete the anticipated move
-					Board[row+row1][col+col1]->p.bOrW = '-';
-					Board[row+row1][col+col1]->p.unicode = " ";
-
+			if(space_valid(row1, col1, id, Board2, 0, 1)){
+				//fill in board with anticipated move, then check point value
+				if (id == 1){
+					Board2[row+row1][col+col1]->p.bOrW = 'B';
+					Board2[row+row1][col+col1]->p.unicode = "\u25CB";
+				}
+				else if (id == 2){
+					Board2[row+row1][col+col1]->p.bOrW = 'W';
+					Board2[row+row1][col+col1]->p.unicode = "\u25CF";
+				}
+				//print_board(Board2);
+				current_point = point(Board2);
+				//cout << "Current Point: " << current_point << endl;
+				if (current_point > high_point){
+					high_point = current_point;
+					high_row = row1;
+					high_col = col1;
+					//cout << high_point << endl;
 				}
 
 			}
 
-		}
-
+	 	}
 	}
- *///AI testing
+
+	i = high_row;
+	j = high_col;
+
+	if(high_point){
+		space_valid(row+i, col+j, id, Board, 0, 1);
+	}
+
 	if (!high_point){
-		cout << "easy mode activated" << endl;
+		//cout << "easy mode activated" << endl;
 	/*easy mode*/
 		for (i = 1; i < 9; i++){
 
@@ -61,6 +70,8 @@ void Computer::computer_move(int id, arr& Board, arr& Board2){
 			}
 		}
 	}
+
+
 
 	if (id == 1){
 
