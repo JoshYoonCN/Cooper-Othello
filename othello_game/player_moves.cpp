@@ -4,10 +4,11 @@ void ask_opponent(Player &p1, Player &p2, Computer& c){
 	
 	char input;
 	char input2;
+	char input3;
 
 	do {
 		
-		cout << "Would you like to play against a computer (Y/N)?";
+		cout << "Would you like to play against a computer (Y/N)? ";
 		cin >> input;
 
 	} while (!yes_no_valid(input));
@@ -20,7 +21,7 @@ void ask_opponent(Player &p1, Player &p2, Computer& c){
 		
 		do{
 		
-			cout << "Would you like to go first (Y/N)?";
+			cout << "Would you like to go first (Y/N)? ";
 			cin >> input2;
 		
 		} while (!yes_no_valid(input2));
@@ -29,7 +30,15 @@ void ask_opponent(Player &p1, Player &p2, Computer& c){
 
 			p1.id = 2;
 			c.id = 1;
-		}	
+		}
+		
+		do {
+		
+			cout << "Please choose a difficulty level: Easy (1), Medium (2), Mintchev (3)! ";
+			cin >> input3;
+		} while (!diff_valid(input3));
+
+		c.difficulty = input3;
 	}
 	else if (input == 'N' || input == 'n'){
 
@@ -41,7 +50,7 @@ void ask_opponent(Player &p1, Player &p2, Computer& c){
 }
 
 //player move
-void Player::player_move(int id, arr& Board){
+void Player::player_move(int id, string unicode, arr& Board){
 
 	//initialize these to 0
 	int row = 0, col = 0;
@@ -50,7 +59,7 @@ void Player::player_move(int id, arr& Board){
 
 		do{
 			//read in row from user
-			cout << "Player " << id << ", please enter a row (1-8): ";
+			cout << "Player " << id << " (" << unicode << "), please enter a row (1-8): ";
 			cin >> row;
 			
 			//some useful protection against bad inputs		
@@ -71,7 +80,7 @@ void Player::player_move(int id, arr& Board){
 
 		do{
 			//read in column from user
-			cout << "Player " << id << ", please enter a column (1-8): ";
+			cout << "Player " << id << " (" << unicode << "), please enter a column (1-8): ";
 			cin >> col;
 			
 			//same protection

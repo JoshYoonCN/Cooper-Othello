@@ -1,6 +1,7 @@
 #include "othello.h"
 
 arr Board (10, row(10));
+arr Board2 (10, row(10));
 
 int main(){
 
@@ -16,17 +17,21 @@ int main(){
 
 	while (end_condition(Board)) {
 
-		print_board(Board);
-	
 		if (!c.playing){
 
 			if (((turnCount%2)+1) == 1){
 
-				p1.player_move(p1.id, Board);
+				possible(p1.id, Board, Board2);
+				print_board(Board);
+				p1.player_move(p1.id, "\u25CB", Board);
+				clearPossible(Board);
 			}
 			else{
-	
-				p2.player_move(p2.id, Board);
+
+				possible(p2.id, Board, Board2);
+				print_board(Board);
+				p2.player_move(p2.id, "\u25CB", Board);
+				clearPossible(Board);
 			}
 		}
 		else{
@@ -34,31 +39,40 @@ int main(){
 			if (((turnCount%2)+1) == 1){
 
 				if (p1.id == 1){
-					
-					p1.player_move(p1.id, Board);
+				
+					possible(p1.id, Board, Board2);
+					print_board(Board);
+					p1.player_move(p1.id, "\u25CB", Board);
+					clearPossible(Board);
 				}
 				else{
-					
-					c.computer_move(c.id, Board);
+					c.computer_move(c.id, Board, Board2, c.difficulty);
+					print_board(Board);
 				}
 			}
 			else{
 				if (p1.id == 1){
-
-					c.computer_move(c.id, Board);
+					c.computer_move(c.id, Board, Board2, c.difficulty);
+					print_board(Board);
 				}
 				else{
-					
-					p1.player_move(p1.id, Board);
+				
+					possible(p1.id, Board, Board2);
+					print_board(Board);
+					p1.player_move(p1.id, "\u25CF", Board);
+					clearPossible(Board);
 				}
 
 			}
 		}
 
 		points(Board);
-					
+
 		turnCount++;
 	}
+
+	clean(Board);
+	clean(Board2);
 
 	return 0;
 }

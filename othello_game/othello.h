@@ -96,7 +96,7 @@ public:
 	
 	~Player(){}
 	
-	void player_move(int id, arr& Board);
+	void player_move(int id, string unicode, arr& Board);
 };
 
 class Computer {
@@ -105,16 +105,90 @@ public:
 
 	int id;
 	int playing;
+	char difficulty;
 
-	Computer () {}	
+	Computer () {}
 	
 	Computer (int id, int playing) : id(id), playing(playing) {}
 
 	~Computer () {}
 	
-	void computer_move(int id, arr& Board);
+	void computer_move(int id, arr& Board, arr& Board2, char difficulty);
 };
 
+class Move{
+
+public:
+	int row;
+	int col;
+	int mid_value;
+	int high_value;
+	int corner;
+
+	Move () {}
+
+	Move (int r, int col, int m, int h, int c) : row(r), col(c), mid_value(m), high_value(h), corner(c) {}
+
+	Move& operator= (const Move& c){
+
+		row = c.row;
+		col = c.col;
+		mid_value = c.mid_value;
+		high_value = c.mid_value;
+		corner = c.corner;
+		return *this;
+	}
+
+	Move (const Move& c){
+	
+		row = c.row;
+		col = c.col;
+		mid_value = c.mid_value;
+		high_value = c.mid_value;
+		corner = c.corner;
+	}
+
+//	friend bool operator< (const Move &lhs, const Move &rhs);
+};
+
+struct {
+	
+	bool operator() (const Move &lhs, const Move &rhs){
+	
+		if (lhs.corner > rhs.corner){
+		
+			return true;
+		}
+		else if (lhs.corner < rhs.corner){
+		
+			return false;
+		}
+		else{
+			if(lhs.mid_value > rhs.mid_value){
+
+				return true;
+			}
+			else if(lhs.mid_value < rhs.mid_value){
+			
+				return false;
+			}
+			else {
+				if(lhs.high_value > rhs.high_value){
+		
+					return true;
+				}
+				else if(lhs.high_value < rhs.high_value){
+
+					return false;
+				}
+				else {
+				
+					return false;
+				}
+			}
+		}
+	}
+} Cmp;
 /*
 class Board {
 
@@ -128,6 +202,7 @@ public:
 
 	~Board () {};
 };*/
+
 
 
 //vector<vector<Space*> > Board (10, vector<Space*>(10));
@@ -144,5 +219,12 @@ int col_input_valid(int input);
 int yes_no_valid(char c);
 int end_condition(arr& Board);
 void points(arr& Board);
-
+void copy_board(arr& Board, arr& Board2);
+int point(arr& Board);
+void possible(int id, arr& board, arr& Board2);
+void clearPossible(arr&Board);
+void clean(arr& Board);
+int diff_valid(char c);
+int mid_points(arr& Board);
+int checkCorners(int col, int row);
 #endif
