@@ -1,5 +1,6 @@
 #include "othello.h"
 
+//main file
 arr Board (10, row(10));
 arr Board2 (10, row(10));
 
