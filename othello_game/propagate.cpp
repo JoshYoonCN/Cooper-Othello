@@ -56,7 +56,7 @@ int propagate(int row, int col, signed int row_increment, signed int col_increme
 	if (cond == 1 && flip == 1){
 
 		//cout << "flipping mechanism called" << endl;
-		row_copy += row_increment;
+		row_copy += row_increment; //+1 in the direction you want to check
 		col_copy += col_increment;
 
 		//this while loop flips pieces
@@ -80,7 +80,7 @@ int propagate(int row, int col, signed int row_increment, signed int col_increme
 		return 1;
 	}
 	else if (cond == 1 && flip == 0){
-		
+
 		return 1;
 	}
 

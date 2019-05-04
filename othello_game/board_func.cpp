@@ -1,5 +1,7 @@
 #include "othello.h"
+int point(arr& Board){ // check how many points
 
+<<<<<<< HEAD
 void clean(arr& Board){
 
 	for (int row = 0; row < 10; row++){
@@ -51,6 +53,27 @@ void clearPossible(arr&Board){
 }
 
 int point(arr& Board){ // check how many points
+=======
+	int black = 0, white = 0;
+
+	for (int i = 1; i < 9; i++){
+
+		for (int j = 1; j < 9; j++){
+
+			if (Board[i][j]->p.bOrW == 'B'){
+
+				black++;
+			}
+			else if (Board[i][j]->p.bOrW == 'W'){
+
+				white++;
+			}
+		}
+	}
+	return (black - white);
+}
+void points(arr& Board){
+>>>>>>> 248a78d99b1a04a59048dc5ee9feac73b27a455b
 
 	int black = 0, white = 0;
 
@@ -60,6 +83,7 @@ int point(arr& Board){ // check how many points
 
 			if (Board[i][j]->p.bOrW == 'B'){
 
+<<<<<<< HEAD
 				black++;
 			}
 			else if (Board[i][j]->p.bOrW == 'W'){
@@ -81,6 +105,8 @@ int mid_points(arr& Board){
 
 			if (Board[i][j]->p.bOrW == 'B'){
 				
+=======
+>>>>>>> 248a78d99b1a04a59048dc5ee9feac73b27a455b
 				black++;
 			}
 			else if (Board[i][j]->p.bOrW == 'W'){
@@ -189,6 +215,10 @@ void print_board(arr& Board){
 
 	/*
 	for(int j = 0; j < 8; j++){
+<<<<<<< HEAD
+=======
+
+>>>>>>> 248a78d99b1a04a59048dc5ee9feac73b27a455b
 		for(int k = 0; k < 8; k++){
 			cout << Board[j+1][k+1]->p.unicode;
 		}
@@ -202,6 +232,11 @@ void print_board(arr& Board){
 
 			cout << "\33[0:32m\u2551\33[0m " << Board[i][j]->p.unicode << " ";
 		}
+<<<<<<< HEAD
+=======
+
+		cout << "\u2551" << endl;
+>>>>>>> 248a78d99b1a04a59048dc5ee9feac73b27a455b
 
 		cout << "\33[0:32m\u2551\33[0m" << endl;
 
