@@ -67,10 +67,12 @@ int main(){
 			}
 		}
 
-		points(Board);
+		points(Board, 0);
 
 		turnCount++;
 	}
+
+	points(Board, 1);
 
 	clean(Board);
 	clean(Board2);

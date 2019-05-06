@@ -127,7 +127,7 @@ public:
 
 	Move () {}
 
-	Move (int r, int col, int m, int h, int c) : row(r), col(c), mid_value(m), high_value(h), corner(c) {}
+	Move (int r, int col, int m, int h, int c) : row(r), col(col), mid_value(m), high_value(h), corner(c) {}
 
 	Move& operator= (const Move& c){
 
@@ -218,7 +218,7 @@ int row_input_valid(int input);
 int col_input_valid(int input);
 int yes_no_valid(char c);
 int end_condition(arr& Board);
-void points(arr& Board);
+void points(arr& Board, int win);
 void copy_board(arr& Board, arr& Board2);
 int point(arr& Board);
 void possible(int id, arr& board, arr& Board2);

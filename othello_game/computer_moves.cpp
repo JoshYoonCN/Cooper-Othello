@@ -101,38 +101,29 @@ void Computer::computer_move(int id, arr& Board, arr& Board2, char difficulty){
 					current_point = point(Board2);
 					mid_point = mid_points(Board);	
 					corner = checkCorners(row1, col1);	
+				
+					/*
+					cout << row1 << endl;
+					cout << col1 << endl;	
+					cout << mid_point << endl;
+					cout << current_point << endl;
+					cout << corner << endl;
+					*/
 
 					Move current(row1, col1, mid_point, current_point, corner);
 					
 					cmp.push_back(current); 
-					/*					
-					if(high_point == 65){
-						
-						high_point = current_point;
-						high_row = row1;
-						high_col = col1;	
-					}
-					else if (checkCorners(row1, col1)){
-
-						high_point = current_point;
-						mid_point = current_mid_point;
-						high_row = row1;
-						high_col = col1;
-						continue;
-					}
-					else if (current_point > high_point){
-						high_point = current_point;
-						high_row = row1;
-						high_col = col1;
-						//cout << high_point << endl;
-					} 
-					*/
+					//cout << "cmp[0].row: " << cmp[0].row << endl;
+					//cout << "cmp[0].col: " << cmp[0].col << endl; 
 				}
 
 	 		}
 		}
 
 		sort(cmp.begin(), cmp.end(), Cmp);
+		
+		//cout << "cmp[0].row: " << cmp[0].row << endl;
+		//cout << "cmp[0].col: " << cmp[0].col << endl; 
 
 		space_valid(cmp[0].row, cmp[0].col, id, Board, 0, 1);
 

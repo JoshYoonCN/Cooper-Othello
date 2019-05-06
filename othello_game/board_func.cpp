@@ -93,7 +93,7 @@ int mid_points(arr& Board){
 	return (black - white);
 }
 
-void points(arr& Board){
+void points(arr& Board, int win){
 
 	int black = 0, white = 0;
 
@@ -111,9 +111,26 @@ void points(arr& Board){
 			}
 		}
 	}
+	if (!win){
 
-	cout << "Black has " << black << " points!" << endl;
-	cout << "White has " << white << " points!" << endl;
+		cout << "       \33[0:36mBlack: " << black << "     " << "White: " << white << "\33[0m" << endl;
+	}
+	else {
+
+		cout << "\33[0:36Black: " << black << ", White: " << white << endl;
+		if (white > black){
+
+			cout << "White Wins!!!" << endl;
+		}
+		else if (black > white){
+
+			cout << "Black Wins!!!" << endl;
+		}
+		else {
+			
+			cout << "The Game is a Tie!!!" << endl;
+		}
+	}
 
 	return;
 }
@@ -194,10 +211,12 @@ void print_board(arr& Board){
 		}
 		printf("\n");
 	}*/
-
-	cout << "\33[0:32m\u2553 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2557\33[0m" << endl;
+	
+	cout << "    1   2   3   4   5   6   7   8" << endl;	
+	cout << "  \33[0:32m\u2553 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2557\33[0m" << endl;
 	for (int i = 1; i < 8; i++){
 
+		cout << i << " ";
 		for (int j = 1; j < 9; j++){
 
 			cout << "\33[0:32m\u2551\33[0m " << Board[i][j]->p.unicode << " ";
@@ -205,8 +224,10 @@ void print_board(arr& Board){
 
 		cout << "\33[0:32m\u2551\33[0m" << endl;
 
-		cout << "\33[0:32m\u2551 \u2550 \u256C \u2550 \u256C \u2550 \u256C \u2550 \u256C \u2550 \u256C \u2550 \u256C \u2550 \u256C \u2550 \u2551\33[0m" << endl;
+		cout << "  \33[0:32m\u2551 \u2550 \u256C \u2550 \u256C \u2550 \u256C \u2550 \u256C \u2550 \u256C \u2550 \u256C \u2550 \u256C \u2550 \u2551\33[0m" << endl;
 	}
+
+	cout << "8 ";
 
 	for (int j = 1; j < 9; j++){
 
@@ -215,7 +236,7 @@ void print_board(arr& Board){
 
 	cout << "\33[0:32m\u2551\33[0m" << endl;
 
-	cout << "\33[0:32m\u255A \u2550 \u2569 \u2550 \u2569 \u2550 \u2569 \u2550 \u2569 \u2550 \u2569 \u2550 \u2569 \u2550 \u2569 \u2550 \u255D\33[0m" << endl;
+	cout << "  \33[0:32m\u255A \u2550 \u2569 \u2550 \u2569 \u2550 \u2569 \u2550 \u2569 \u2550 \u2569 \u2550 \u2569 \u2550 \u2569 \u2550 \u255D\33[0m" << endl;
 
 	return;
 }
