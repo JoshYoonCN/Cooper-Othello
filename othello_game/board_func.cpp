@@ -1,5 +1,6 @@
 #include "othello.h"
 
+//ensure that there is no memory leak by deleting all the objects
 void clean(arr& Board){
 
 	for (int row = 0; row < 10; row++){
@@ -14,17 +15,20 @@ void clean(arr& Board){
 
 }
 
+//check if a space is possible, this will be used to show the user what potential values are
 void possible(int id, arr& Board, arr& Board2){
 
 	int row = 0, col = 0;
 
 	for (row = 1; row < 9; row++){
+		
 		for (col = 1; col < 9; col++){
 
 			copy_board(Board, Board2);
 
 			if(space_valid(row, col, id, Board2, 0, 0)){
-
+				
+				//fill in the space with the diamond unicode
 				Board[row][col]->p.unicode = "\33[0:35m\u25C7\33[0m";
 			}
 		}
@@ -33,6 +37,7 @@ void possible(int id, arr& Board, arr& Board2){
 	return;
 }
 
+//clear the space so that the computer can move properly and prep board for the next iteration
 void clearPossible(arr&Board){
 
 	int row = 0, col = 0;
@@ -50,7 +55,8 @@ void clearPossible(arr&Board){
 	return;
 }
 
-int point(arr& Board){ // check how many points
+//used in the computer logic, test for the points that each player has
+int point(arr& Board){
 
 	int black = 0, white = 0;
 
@@ -58,26 +64,31 @@ int point(arr& Board){ // check how many points
 
 		for (int j = 1; j < 9; j++){
 
+			//if a black character is found, increment black counter
 			if (Board[i][j]->p.bOrW == 'B'){
 
 				black++;
 			}
+			//if a white character is found, increment white counter
 			else if (Board[i][j]->p.bOrW == 'W'){
 
 				white++;
 			}
 		}
 	}
+	//return the difference
 	return (black - white);
 }
 
+//checks for the inner 4x4 area for the pieces that are currently on
+//used in computer logic
 int mid_points(arr& Board){
 
 	int black = 0, white = 0;
 
 	for (int i = 3; i < 7; i++){
 
-		for (int j = 1; j < 7; j++){
+		for (int j = 3; j < 7; j++){
 
 			if (Board[i][j]->p.bOrW == 'B'){
 				
@@ -93,10 +104,57 @@ int mid_points(arr& Board){
 	return (black - white);
 }
 
+//checks for the side points, as having more sidepoints is advantageous
+//used in computer logic
+int side_points(arr& Board){
+
+	int black = 0, white = 0;
+	
+	for (int i = 1; i < 9; i++){
+
+		if (Board[i][1]->p.bOrW == 'B'){
+
+			black++;
+		}
+		else if (Board[i][1]->p.bOrW == 'W'){
+
+			white++;
+		}
+		if (Board[i][8]->p.bOrW == 'B'){
+
+			black++;
+		}
+		else if (Board[i][8]->p.bOrW == 'W'){
+
+			white++;
+		}
+		if (Board[1][i]->p.bOrW == 'B'){
+
+			black++;
+		}
+		else if (Board[1][i]->p.bOrW == 'W'){
+
+			white++;
+		}
+		if (Board[8][i]->p.bOrW == 'B'){
+
+			black++;
+		}
+		else if (Board[8][i]->p.bOrW == 'W'){
+
+			white++;
+		}
+	}
+
+	return (black - white);
+}
+
+//this function displays the number of points each player has during the game and at the end
 void points(arr& Board, int win){
 
 	int black = 0, white = 0;
 
+	//loop through the board, and increment corresponding points
 	for (int i = 1; i < 9; i++){
 
 		for (int j = 1; j < 9; j++){
@@ -111,13 +169,15 @@ void points(arr& Board, int win){
 			}
 		}
 	}
+
+	//all of the output statements
 	if (!win){
 
 		cout << "       \33[0:36mBlack: " << black << "     " << "White: " << white << "\33[0m" << endl;
 	}
 	else {
 
-		cout << "\33[0:36Black: " << black << ", White: " << white << endl;
+		cout << "\33[0:36mBlack: " << black << ", White: " << white << endl;
 		if (white > black){
 
 			cout << "White Wins!!!" << endl;
@@ -135,6 +195,7 @@ void points(arr& Board, int win){
 	return;
 }
 
+//this checks for the end condition, test for whether spaces are valid throughout the board
 int end_condition(arr& Board){
 
 	int row = 0, col = 0, i, j;
@@ -204,14 +265,7 @@ void init_board(arr& Board){
 //print out board
 void print_board(arr& Board){
 
-	/*
-	for(int j = 0; j < 8; j++){
-		for(int k = 0; k < 8; k++){
-			cout << Board[j+1][k+1]->p.unicode;
-		}
-		printf("\n");
-	}*/
-	
+	//board is formatted via unicode and spacing	
 	cout << "    1   2   3   4   5   6   7   8" << endl;	
 	cout << "  \33[0:32m\u2553 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2566 \u2550 \u2557\33[0m" << endl;
 	for (int i = 1; i < 8; i++){
@@ -244,7 +298,6 @@ void print_board(arr& Board){
 
 //2 board references - initialize 2nd board
 // copy constructors to copy the spaces
-
 void copy_board(arr& Board, arr& Board2){
 	//cout << "initialize" << endl;
 	init_board(Board2);
@@ -268,17 +321,7 @@ void copy_board(arr& Board, arr& Board2){
 		*(Board2[jj][0]) = (*(Board[jj][0]));
 		*(Board2[jj][9]) = (*(Board[jj][9]));
 	}
-/*
-	//set initial Board2 state
-	Board2[4][4]->p.bOrW = 'W';
-	Board2[4][4]->p.unicode = "\u25CF";
-	Board2[4][5]->p.bOrW = 'B';
-	Board2[4][5]->p.unicode = "\u25CB";
-	Board2[5][4]->p.bOrW = 'B';
-	Board2[5][4]->p.unicode = "\u25CB";
-	Board2[5][5]->p.bOrW = 'W';
-	Board2[5][5]->p.unicode = "\u25CF";
-*/
+	
 	//print_board(Board2);
 	return;
 

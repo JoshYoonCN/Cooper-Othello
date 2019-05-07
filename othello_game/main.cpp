@@ -1,19 +1,23 @@
 #include "othello.h"
 
-//main file
+//initialize two boards, one that holds game state, other that will be used in computer ai
 arr Board (10, row(10));
 arr Board2 (10, row(10));
 
 int main(){
 
+	//initialize turn count
 	int turnCount = 0;
 
+	//instantiate each of the player and computer
 	Player p1(1, 0);
 	Player p2(2, 0);
 	Computer c(2, 0);
-	//need to add a "moves left" function that tests for end of game, but for now will assume 60 turns
+	
+	//initialize board
 	init_board(Board);
 
+	//ask user what kind of opponent that they want
 	ask_opponent(p1, p2, c);
 
 	while (end_condition(Board)) {
@@ -48,13 +52,13 @@ int main(){
 				}
 				else{
 					c.computer_move(c.id, Board, Board2, c.difficulty);
-					print_board(Board);
+					//print_board(Board);
 				}
 			}
 			else{
 				if (p1.id == 1){
 					c.computer_move(c.id, Board, Board2, c.difficulty);
-					print_board(Board);
+					//print_board(Board);
 				}
 				else{
 				

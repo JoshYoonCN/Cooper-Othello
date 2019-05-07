@@ -8,6 +8,7 @@ void Computer::computer_move(int id, arr& Board, arr& Board2, char difficulty){
 	int high_row = 0;
 	int high_col = 0;
 	int mid_point = 0;	
+	int side_point = 0;
 	int corner;
 
 	vector<Move> cmp;
@@ -88,6 +89,7 @@ void Computer::computer_move(int id, arr& Board, arr& Board2, char difficulty){
 				//print_board(Board2);
 
 				if(space_valid(row1, col1, id, Board2, 0, 1)){
+				
 					//fill in board with anticipated move, then check point value
 					if (id == 1){
 						Board2[row1][col1]->p.bOrW = 'B';
@@ -99,9 +101,10 @@ void Computer::computer_move(int id, arr& Board, arr& Board2, char difficulty){
 					}
 					//print_board(Board2);
 					current_point = point(Board2);
-					mid_point = mid_points(Board);	
+					mid_point = mid_points(Board2);	
 					corner = checkCorners(row1, col1);	
-				
+					side_point = side_points(Board2);
+									
 					/*
 					cout << row1 << endl;
 					cout << col1 << endl;	
@@ -110,7 +113,7 @@ void Computer::computer_move(int id, arr& Board, arr& Board2, char difficulty){
 					cout << corner << endl;
 					*/
 
-					Move current(row1, col1, mid_point, current_point, corner);
+					Move current(row1, col1, mid_point, current_point, corner, side_point);
 					
 					cmp.push_back(current); 
 					//cout << "cmp[0].row: " << cmp[0].row << endl;

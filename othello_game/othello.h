@@ -123,11 +123,12 @@ public:
 	int col;
 	int mid_value;
 	int high_value;
+	int side_value;
 	int corner;
 
 	Move () {}
 
-	Move (int r, int col, int m, int h, int c) : row(r), col(col), mid_value(m), high_value(h), corner(c) {}
+	Move (int r, int col, int m, int h, int c, int s) : row(r), col(col), mid_value(m), high_value(h), corner(c), side_value(s) {}
 
 	Move& operator= (const Move& c){
 
@@ -136,6 +137,7 @@ public:
 		mid_value = c.mid_value;
 		high_value = c.mid_value;
 		corner = c.corner;
+		side_value = c.side_value;
 		return *this;
 	}
 
@@ -146,6 +148,7 @@ public:
 		mid_value = c.mid_value;
 		high_value = c.mid_value;
 		corner = c.corner;
+		side_value = c.side_value;
 	}
 
 //	friend bool operator< (const Move &lhs, const Move &rhs);
@@ -164,26 +167,37 @@ struct {
 			return false;
 		}
 		else{
-			if(lhs.mid_value > rhs.mid_value){
+			if (lhs.side_value > rhs.side_value){
 
 				return true;
 			}
-			else if(lhs.mid_value < rhs.mid_value){
-			
+			else if (lhs.side_value < rhs.side_value){
+
 				return false;
 			}
 			else {
-				if(lhs.high_value > rhs.high_value){
-		
+
+				if (lhs.mid_value > rhs.mid_value){
+
 					return true;
 				}
-				else if(lhs.high_value < rhs.high_value){
-
+				else if (lhs.mid_value < rhs.mid_value){
+			
 					return false;
 				}
 				else {
+					if (lhs.high_value > rhs.high_value){
+		
+						return true;
+					}
+					else if (lhs.high_value < rhs.high_value){
+
+						return false;
+					}
+					else {
 				
-					return false;
+						return false;
+					}
 				}
 			}
 		}
@@ -227,4 +241,6 @@ void clean(arr& Board);
 int diff_valid(char c);
 int mid_points(arr& Board);
 int checkCorners(int col, int row);
+int side_points(arr& Board);
+
 #endif
