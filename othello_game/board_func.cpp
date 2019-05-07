@@ -177,7 +177,7 @@ void points(arr& Board, int win){
 	}
 	else {
 
-		cout << "\33[0:36mBlack: " << black << ", White: " << white << endl;
+		cout << "\33[0:36mBlack: " << black << ", White: " << white << "\33[0m" << endl;
 		if (white > black){
 
 			cout << "White Wins!!!" << endl;
