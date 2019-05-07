@@ -86,39 +86,49 @@ typedef vector<row> arr;
 class Player {
 	
 public:
-
+	//members
 	int id;
 	int playing;
 
+	//default constructor
 	Player () {}
 	
+	//copy constructor
 	Player (int id, int playing) : id(id), playing(playing) {}
 	
+	//destructor
 	~Player(){}
 	
+	//member function
 	void player_move(int id, string unicode, arr& Board);
 };
 
 class Computer {
 	
 public:
-
+	//members
 	int id;
 	int playing;
 	char difficulty;
 
+	//default constructor
 	Computer () {}
 	
+	//copy constructor
 	Computer (int id, int playing) : id(id), playing(playing) {}
 
+	//destructor
 	~Computer () {}
 	
+	//member function
 	void computer_move(int id, arr& Board, arr& Board2, char difficulty);
 };
 
+//this class is mainly used in the computer logic
 class Move{
 
 public:
+	//members
 	int row;
 	int col;
 	int mid_value;
@@ -126,10 +136,13 @@ public:
 	int side_value;
 	int corner;
 
+	//default constructor
 	Move () {}
 
+	//constructor
 	Move (int r, int col, int m, int h, int c, int s) : row(r), col(col), mid_value(m), high_value(h), corner(c), side_value(s) {}
 
+	//assignment operator
 	Move& operator= (const Move& c){
 
 		row = c.row;
@@ -141,6 +154,7 @@ public:
 		return *this;
 	}
 
+	//assignment operator
 	Move (const Move& c){
 	
 		row = c.row;
@@ -151,9 +165,9 @@ public:
 		side_value = c.side_value;
 	}
 
-//	friend bool operator< (const Move &lhs, const Move &rhs);
 };
 
+//compare struct
 struct {
 	
 	bool operator() (const Move &lhs, const Move &rhs){
@@ -203,6 +217,7 @@ struct {
 		}
 	}
 } Cmp;
+
 /*
 class Board {
 
@@ -222,6 +237,7 @@ public:
 //vector<vector<Space*> > Board (10, vector<Space*>(10));
 //arr Board (10, row(10));
 
+//function prototypes for all the necessary functions
 void ask_opponent(Player &p1, Player &p2, Computer& c);
 void init_board(arr& Board);
 void print_board(arr& Board);

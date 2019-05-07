@@ -187,6 +187,7 @@ int col_input_valid(int input){
 	return 1;
 }
 
+//check if the user input yes or no is valid
 int yes_no_valid(char c){
 	
 	if (c == 'Y' || c == 'y' || c == 'N' || c == 'n'){
@@ -199,6 +200,7 @@ int yes_no_valid(char c){
 	return 0;
 }
 
+//check for if the user difficulty input is valid
 int diff_valid(char c){
 
 	if (c == '1' || c == '2' || c == '3'){

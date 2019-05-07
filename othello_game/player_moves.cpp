@@ -1,11 +1,13 @@
 #include "othello.h"
 
+//ask the user for the type of opponent they want to face 
 void ask_opponent(Player &p1, Player &p2, Computer& c){
 	
 	char input;
 	char input2;
 	char input3;
 
+	//do while loop that prompts for whether user wants to play vs person or computer
 	do {
 		
 		cout << "Would you like to play against a computer (Y/N)? ";
@@ -13,12 +15,13 @@ void ask_opponent(Player &p1, Player &p2, Computer& c){
 
 	} while (!yes_no_valid(input));
 
-
+	//asks if player wants to go first
 	if (input == 'Y' || input == 'y'){
 
 		p1.playing = 1;
 		c.playing = 1;
-		
+	
+		//checks if the player wants to go first against the computer	
 		do{
 		
 			cout << "Would you like to go first (Y/N)? ";
@@ -32,6 +35,7 @@ void ask_opponent(Player &p1, Player &p2, Computer& c){
 			c.id = 1;
 		}
 		
+		//choose difficulty	
 		do {
 		
 			cout << "Please choose a difficulty level: Easy (1), Medium (2), Mintchev (3)! ";
@@ -45,7 +49,8 @@ void ask_opponent(Player &p1, Player &p2, Computer& c){
 		p1.playing = 1;
 		p2.playing = 1;
 	}
-	
+
+	//return to main function	
 	return;
 }
 

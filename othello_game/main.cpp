@@ -22,10 +22,12 @@ int main(){
 
 	while (end_condition(Board)) {
 
+		//this will only occur if the computer is not playing
 		if (!c.playing){
 
 			if (((turnCount%2)+1) == 1){
 
+				//both players require the possible and clear possible moves
 				possible(p1.id, Board, Board2);
 				print_board(Board);
 				p1.player_move(p1.id, "\u25CB", Board);
@@ -41,6 +43,7 @@ int main(){
 		}
 		else{
 
+			//this turncount tracks which player's turn it is
 			if (((turnCount%2)+1) == 1){
 
 				if (p1.id == 1){
@@ -52,13 +55,11 @@ int main(){
 				}
 				else{
 					c.computer_move(c.id, Board, Board2, c.difficulty);
-					//print_board(Board);
 				}
 			}
 			else{
 				if (p1.id == 1){
 					c.computer_move(c.id, Board, Board2, c.difficulty);
-					//print_board(Board);
 				}
 				else{
 				
@@ -71,13 +72,17 @@ int main(){
 			}
 		}
 
+		//display points
 		points(Board, 0);
 
+		//increment turn count
 		turnCount++;
 	}
 
+	//display final score
 	points(Board, 1);
 
+	//clean the boards
 	clean(Board);
 	clean(Board2);
 
