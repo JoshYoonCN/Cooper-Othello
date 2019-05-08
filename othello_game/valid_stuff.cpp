@@ -26,7 +26,6 @@ int space_valid(int row, int col, int id, arr& Board, int c_or_p, int flip){
 			
 			if(propagate(row, col, 1, 0, id, Board, flip)){
 				
-				//Board[row+1][col]->p.unicode = "\33[0:35m25CC\33[0m";	
 				valid++;	
 			}
 		}
@@ -34,7 +33,6 @@ int space_valid(int row, int col, int id, arr& Board, int c_or_p, int flip){
 		
 			if(propagate(row, col, 0, -1, id, Board, flip)){
 			
-				//Board[row][col-1]->p.unicode = "\33[0:35m25CC\33[0m";
 				valid++;	
 			}
 		}
@@ -42,7 +40,6 @@ int space_valid(int row, int col, int id, arr& Board, int c_or_p, int flip){
 			
 			if(propagate(row, col, 0, 1, id, Board, flip)){
 				
-				//Board[row][col+1]->p.unicode = "\33[0:35m25CC\33[0m";
 				valid++;	
 			}
 		}
@@ -50,7 +47,6 @@ int space_valid(int row, int col, int id, arr& Board, int c_or_p, int flip){
 		
 			if(propagate(row, col, -1, 0, id, Board, flip)){
 				
-				//Board[row-1][col]->p.unicode = "\33[0:35m25CC\33[0m";
 				valid++;	
 			}
 		}
@@ -58,7 +54,6 @@ int space_valid(int row, int col, int id, arr& Board, int c_or_p, int flip){
 		
 			if(propagate(row, col, -1, -1, id, Board, flip)){
 				
-				//Board[row-1][col-1]->p.unicode = "\33[0:35m25CC\33[0m";
 				valid++;	
 			}
 		}
@@ -66,7 +61,6 @@ int space_valid(int row, int col, int id, arr& Board, int c_or_p, int flip){
 
 			if(propagate(row, col, -1, 1, id, Board, flip)){
 				
-				//Board[row-1][col+1]->p.unicode = "\33[0:35m25CC\33[0m";
 				valid++;	
 			}
 		}
@@ -74,7 +68,6 @@ int space_valid(int row, int col, int id, arr& Board, int c_or_p, int flip){
 		
 			if(propagate(row, col, 1, -1, id, Board, flip)){
 				
-				//Board[row+1][col-1]->p.unicode = "\33[0:35m25CC\33[0m";
 				valid++;	
 			}
 		}
@@ -82,7 +75,6 @@ int space_valid(int row, int col, int id, arr& Board, int c_or_p, int flip){
 		
 			if(propagate(row, col, 1, 1, id, Board, flip)){
 				
-				//Board[row+1][col+1]->p.unicode = "\33[0:35m25CC\33[0m";
 				valid++;	
 			}
 		}
